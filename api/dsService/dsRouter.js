@@ -1,4 +1,6 @@
 const express = require('express');
+const axios = require('axios')
+
 const router = express.Router();
 const dsModel = require('./dsModel');
 const authRequired = require('../middleware/authRequired');
@@ -23,10 +25,14 @@ router.get('/incidents', function (req, res) {
   dsModel
     .getData()
     .then((response) => {
-      axios.post('https://labs27-d-hrf-api.herokuapp.com/incidents/addIncidents', response.data)
+      const obj = JSON.parse(response.data)
+      // let incident = { id: obj.id,  } *idea*
+      // console.log(obj)
+      res.status(200).json({message: "got data back"})
+      axios.post('http://localhost:8000/incidents/addIncidents', obj)
+      // res.status(200).json({error_found: false, message: 'data was sent'})
     })
     .catch((error) => {
-      console.log(error);
       res.status(500).json({message: error, error_found: true});
     })
 });

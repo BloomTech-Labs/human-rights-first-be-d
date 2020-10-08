@@ -10,6 +10,8 @@ router.post('/addIncidents', (req, res) => {
 		     	res.status(201).json({error_found: false, message: response})
              })
              .catch((error) =>  {
-                 res.status(500).json({error_found: true, message: error})
+                 res.status(500).json({error_found: true, message: "this is where its messing up"})
              })
 })
+
+module.exports = router;

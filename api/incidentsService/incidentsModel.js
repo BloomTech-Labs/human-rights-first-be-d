@@ -6,3 +6,13 @@ Psuedo-code for addIncidents
         → if not then adds to the table
         → if there is, then updates fields that are passed
 */ 
+
+const db = require('../../data/db-config');
+module.exports={
+    addIncidents
+}
+function addIncidents(arr){
+    arr.forEach(incident => {
+        return db('incidents').insert(incident)
+    });
+} 
